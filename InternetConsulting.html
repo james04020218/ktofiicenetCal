@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실전 인터넷 가입 컨설팅 | AI 어드바이저</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .step-indicator {
+            transition: all 0.3s ease-in-out;
+        }
+        .step-indicator.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .step-indicator.completed {
+            background-color: #16a34a;
+            color: white;
+            border-color: #16a34a;
+        }
+        .option-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-card.selected {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">최적 인터넷 가입 AI 컨설팅</h1>
+            <p class="mt-2 text-lg text-gray-600">실제 판매 노하우를 담아, 최대 혜택을 받는 길을 안내합니다.</p>
+        </header>
+
+        <main id="consulting-app">
+            <div id="step-indicators" class="flex justify-center items-center mb-10 space-x-2 md:space-x-4">
+            </div>
+
+            <div id="steps-container">
+                <section id="step-1" class="fade-in">
+                    <h2 class="text-2xl font-semibold text-center mb-6">1. 인터넷을 찾으시는 이유가 무엇인가요?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('reason', 'new_install')">
+                            <span class="text-4xl">🚚</span>
+                            <h3 class="text-xl font-bold mt-2">신규 설치</h3>
+                            <p class="text-gray-500 mt-1">이사, 분가, 첫 설치 등</p>
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('reason', 'renewal')">
+                             <span class="text-4xl">⌛</span>
+                            <h3 class="text-xl font-bold mt-2">약정 만료</h3>
+                            <p class="text-gray-500 mt-1">사용하던 인터넷 약정이 끝났어요</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="step-2" class="hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-center mb-6">2. 사용 환경이 어떻게 되시나요?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('household', 'single')">
+                            <span class="text-4xl">👤</span>
+                            <h3 class="text-xl font-bold mt-2">1인 가구</h3>
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('household', 'multi')">
+                             <span class="text-4xl">👨‍👩‍👧‍👦</span>
+                            <h3 class="text-xl font-bold mt-2">2인 이상 가구</h3>
+                        </div>
+                         <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('household', 'business')">
+                             <span class="text-4xl">🏢</span>
+                            <h3 class="text-xl font-bold mt-2">사업장</h3>
+                            <p class="text-gray-500 mt-1">사무실, 카페, 식당 등</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="step-3" class="hidden fade-in">
+                     <h2 class="text-2xl font-semibold text-center mb-6">3. 현재 사용 중인 통신사는 어디인가요?</h2>
+                     <p class="text-center text-gray-500 mb-6">최대 혜택을 위해 가장 중요한 질문입니다!</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('currentIsp', 'KT')">
+                            <img src="https://placehold.co/100x40/FF7F00/FFFFFF?text=KT" alt="KT 로고" class="mx-auto h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/FF7F00/FFFFFF?text=KT';">
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('currentIsp', 'SK')">
+                            <img src="https://placehold.co/100x40/E81E2C/FFFFFF?text=SKT" alt="SKT 로고" class="mx-auto h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/E81E2C/FFFFFF?text=SKT';">
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('currentIsp', 'LGU')">
+                            <img src="https://placehold.co/100x40/E83A7E/FFFFFF?text=LGU+" alt="LGU+ 로고" class="mx-auto h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/E83A7E/FFFFFF?text=LGU+';">
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('currentIsp', 'etc')">
+                            <h3 class="font-bold text-lg">케이블/기타</h3>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="step-4" class="hidden fade-in">
+                    <h2 class="text-2xl font-semibold text-center mb-6">4. (가족 포함) 주력 휴대폰 통신사는 어디인가요?</h2>
+                     <p class="text-center text-gray-500 mb-6">결합 할인을 통한 통신비 절감에 필수입니다.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('carrier', 'KT')">
+                            <img src="https://placehold.co/100x40/FF7F00/FFFFFF?text=KT" alt="KT 로고" class="mx-auto h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/FF7F00/FFFFFF?text=KT';">
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('carrier', 'SK')">
+                            <img src="https://placehold.co/100x40/E81E2C/FFFFFF?text=SKT" alt="SKT 로고" class="mx-auto h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/E81E2C/FFFFFF?text=SKT';">
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('carrier', 'LGU')">
+                            <img src="https://placehold.co/100x40/E83A7E/FFFFFF?text=LGU+" alt="LGU+ 로고" class="mx-auto h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/E83A7E/FFFFFF?text=LGU+';">
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 text-center cursor-pointer bg-white" onclick="selectOption('carrier', 'etc')">
+                            <h3 class="font-bold text-lg">알뜰폰/기타</h3>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="step-5" class="hidden fade-in">
+                     <h2 class="text-2xl font-semibold text-center mb-6">5. 주로 어떤 용도로 사용하실 건가요?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 cursor-pointer bg-white" onclick="selectOption('mainUsage', 'basic')">
+                            <h3 class="font-bold text-lg">🌐 가벼운 웹서핑/영상</h3>
+                            <p class="text-gray-500 mt-1">뉴스, 쇼핑, 유튜브, 1~2대 기기 사용</p>
+                        </div>
+                         <div class="option-card border-2 border-gray-200 rounded-lg p-6 cursor-pointer bg-white" onclick="selectOption('mainUsage', 'streaming')">
+                            <h3 class="font-bold text-lg">🎬 고화질 영상/다중접속</h3>
+                            <p class="text-gray-500 mt-1">4K 영화, 여러 기기 동시 사용</p>
+                        </div>
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-6 cursor-pointer bg-white" onclick="selectOption('mainUsage', 'gaming')">
+                            <h3 class="font-bold text-lg">🎮 온라인 게임/방송</h3>
+                            <p class="text-gray-500 mt-1">빠른 반응 속도와 안정성이 가장 중요</p>
+                        </div>
+                         <div class="option-card border-2 border-gray-200 rounded-lg p-6 cursor-pointer bg-white" onclick="selectOption('mainUsage', 'business_critical')">
+                            <h3 class="font-bold text-lg">💳 카드결제기/POS</h3>
+                            <p class="text-gray-500 mt-1">결제 안정성이 최우선인 사업장</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section id="results-section" class="hidden fade-in">
+                 <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-gray-900">AI가 찾은 최적의 가입 전략입니다! 🥳</h2>
+                    <p class="mt-2 text-lg text-gray-600">고객님의 상황 분석을 바탕으로 최대 혜택을 받을 수 있는 추천안입니다.</p>
+                </div>
+                
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md mb-8" role="alert">
+                  <p class="font-bold">⚠️ 최종 확인 필수!</p>
+                  <p>추천된 통신사로 <strong class="underline">최근 3개월 이내에 해지 이력</strong>이 있는 경우, 신규 가입 혜택(현금/상품권)을 받으실 수 없습니다. 반드시 명의자 정보를 확인해주세요.</p>
+                </div>
+
+                <div id="recommendations-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                     </div>
+
+                <div class="text-center">
+                    <button onclick="restart()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors">
+                        처음부터 다시 컨설팅 받기
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const appState = {
+            currentStep: 1,
+            totalSteps: 0,
+            userChoices: {
+                reason: null,
+                household: null,
+                currentIsp: null,
+                carrier: null,
+                mainUsage: null,
+            },
+        };
+
+        const productData = {
+            home: [
+                { 
+                    provider: 'KT', 
+                    name: 'KT 인터넷', 
+                    features: [
+                        '<strong>[대칭형]</strong> 업로드/다운로드 속도가 동일하여 화상회의, 게임, 파일 전송에 가장 유리합니다.',
+                        '<strong>[안정성]</strong> 국내 1위 통신사다운 압도적인 네트워크 안정성으로 끊김이 거의 없습니다.',
+                        '<strong>[무료 공유기]</strong> 500M 이상 가입 시, 일반 공유기보다 신호 범위가 넓고 동시 접속에 강한 최신 <strong>GiGA WiFi 공유기</strong>를 무료로 제공합니다.'
+                    ] 
+                },
+                { 
+                    provider: 'SK', 
+                    name: 'SKB 인터넷', 
+                    features: [
+                        '<strong>[가족결합]</strong> SKT 휴대폰 사용 가족이 많을수록 가장 강력한 요금 할인을 제공합니다.',
+                        '<strong>[무료 설치]</strong> 프로모션을 통해 초기 설치비 전액을 면제받아 부담이 없습니다.',
+                        '<strong>[B tv]</strong> 아이들을 위한 \'잼키즈\' 등 경쟁력 있는 TV 콘텐츠를 다수 보유하고 있습니다.'
+                    ] 
+                },
+                { 
+                    provider: 'LGU', 
+                    name: 'LGU+ 인터넷', 
+                    features: [
+                        '<strong>[OTT 결합]</strong> 넷플릭스, 디즈니+ 등을 인터넷 요금과 함께 신청하면 별도 가입보다 저렴하고 관리가 편합니다.',
+                        '<strong>[알뜰폰 결합]</strong> 통신 3사 중 알뜰폰 사용자에게 가장 유리한 결합 할인 정책을 제공합니다.',
+                        '<strong>[현금 혜택]</strong> 통상적으로 가장 높은 수준의 신규 가입 혜택(사은품)을 기대할 수 있습니다.'
+                    ] 
+                },
+            ],
+            business: [
+                { provider: 'KT', name: 'KT 오피스넷', features: ['PC 연결 대수 제한 없음', '고정 IP 제공 가능', '기업 전용 신속 A/S', '카드결제기 등 안정성 최우선'] },
+                { provider: 'LGU', name: 'LGU+ 사장님패키지', features: ['인터넷+CCTV+POS 등 올인원 제공', '매장 운영 솔루션 지원', '요식업/소매업에 유리'] },
+                { provider: 'SK', name: 'SKB 성공팩', features: ['키오스크/서빙로봇 등 연동', '미래형 리테일 솔루션', '운영 자동화에 유리'] },
+            ]
+        };
+        
+        function initialize() {
+            const reason = appState.userChoices.reason;
+            const household = appState.userChoices.household;
+            let steps = 2; // 기본 2단계
+            if (household === 'business') {
+                steps = 3; // 사업장은 3단계
+            } else if (reason === 'renewal') {
+                steps = 5; // 약정만료 가정용은 5단계
+            } else {
+                steps = 4; // 신규설치 가정용은 4단계
+            }
+            appState.totalSteps = steps;
+            
+            const indicatorsContainer = document.getElementById('step-indicators');
+            indicatorsContainer.innerHTML = '';
+            for (let i = 1; i <= appState.totalSteps; i++) {
+                indicatorsContainer.innerHTML += `<div id="step-indicator-${i}" class="step-indicator flex items-center justify-center w-10 h-10 md:w-12 md:h-12 border-2 border-gray-300 rounded-full font-bold text-lg bg-white">${i}</div>`;
+                if (i < appState.totalSteps) {
+                    indicatorsContainer.innerHTML += `<div class="flex-1 h-1 bg-gray-300"></div>`;
+                }
+            }
+            document.getElementById('step-indicator-1').classList.add('active');
+        }
+
+        function selectOption(key, value) {
+            appState.userChoices[key] = value;
+            
+            const currentStepEl = document.getElementById(event.currentTarget.closest('section').id);
+            const cards = currentStepEl.querySelectorAll('.option-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            if (key === 'reason' || key === 'household') {
+                initialize();
+            }
+
+            setTimeout(() => {
+                const nextStep = appState.currentStep + 1;
+                if (nextStep > appState.totalSteps) {
+                    showResults();
+                } else {
+                    goToStep(nextStep);
+                }
+            }, 400);
+        }
+
+        function goToStep(step) {
+            const allSteps = ['step-1', 'step-2', 'step-3', 'step-4', 'step-5'];
+            allSteps.forEach(s => document.getElementById(s)?.classList.add('hidden'));
+
+            const indicator = document.getElementById(`step-indicator-${appState.currentStep}`);
+            if (indicator) {
+                indicator.classList.remove('active');
+                indicator.classList.add('completed');
+            }
+            
+            appState.currentStep = step;
+            
+            let nextStepId;
+            if (appState.userChoices.household === 'business') {
+                nextStepId = step === 3 ? 'step-5' : `step-${step}`;
+            } else if (appState.userChoices.reason === 'renewal') {
+                 nextStepId = `step-${step}`;
+            } else {
+                nextStepId = step >= 3 ? `step-${step + 1}` : `step-${step}`;
+            }
+            document.getElementById(nextStepId).classList.remove('hidden');
+
+            const nextIndicator = document.getElementById(`step-indicator-${appState.currentStep}`);
+            if (nextIndicator) {
+                nextIndicator.classList.add('active');
+            }
+        }
+
+        function getRecommendations() {
+            const { reason, household, currentIsp, carrier, mainUsage } = appState.userChoices;
+            let recommendations = [];
+
+            if (household === 'business') {
+                if (mainUsage === 'business_critical') {
+                    recommendations.push({ ...productData.business.find(p => p.provider === 'KT'), reason: '카드 결제기, POS 등 금융 거래의 안정성을 최우선으로 고려할 때, 기업 전용망을 사용하는 오피스넷이 가장 신뢰도 높은 선택입니다.' });
+                    recommendations.push({ ...productData.business.find(p => p.provider === 'LGU'), reason: '인터넷과 함께 CCTV, 결제 시스템을 한번에 해결하고 싶다면, 다양한 솔루션을 패키지로 제공하는 LGU+가 편리합니다.' });
+                } else {
+                    recommendations.push({ ...productData.business.find(p => p.provider === 'LGU'), reason: '인터넷과 함께 CCTV, 결제 시스템을 한번에 해결하고 싶다면, 다양한 솔루션을 패키지로 제공하는 LGU+가 편리합니다.' });
+                    recommendations.push({ ...productData.business.find(p => p.provider === 'SK'), reason: '키오스크, 서빙 로봇 등 매장 자동화 기기와의 연동을 고려하신다면, SKB의 솔루션이 유리할 수 있습니다.' });
+                    recommendations.push({ ...productData.business.find(p => p.provider === 'KT'), reason: '다수의 PC 사용과 안정적인 파일 전송 등, 인터넷 본연의 성능과 안정성이 가장 중요하다면 KT 오피스넷을 추천합니다.' });
+                }
+                return recommendations.slice(0,3);
+            }
+
+            // Home user logic
+            let candidates = [...productData.home];
+            let ranked = candidates.map(p => ({ ...p, score: 0, reasons: [] }));
+
+            // 1. 약정 만료 시 통신사 이동 최우선
+            if (reason === 'renewal') {
+                ranked.forEach(p => {
+                    if (p.provider === currentIsp) {
+                        p.score -= 1000;
+                        p.reasons.push('기존 통신사를 유지하면 신규 가입 혜택(현금 사은품)을 받을 수 없어 추천하지 않습니다.');
+                    } else {
+                        p.score += 500;
+                        p.reasons.push('통신사 이동으로 신규 가입 혜택을 극대화할 수 있어 강력히 추천합니다.');
+                    }
+                });
+            }
+
+            // 2. 휴대폰 결합
+            ranked.forEach(p => {
+                if (p.provider === carrier) {
+                    p.score += 300;
+                    p.reasons.push(`사용 중인 ${carrier} 휴대폰과 결합 시, 가장 큰 요금 할인 혜택을 받을 수 있습니다.`);
+                }
+            });
+            if (carrier === 'etc') {
+                let p_lgu = ranked.find(p => p.provider === 'LGU');
+                if (p_lgu) {
+                    p_lgu.score += 100;
+                    p_lgu.reasons.push('알뜰폰 사용자의 경우, LGU+가 가장 유리한 결합 할인 정책을 제공합니다.');
+                }
+            }
+            
+            // 3. 사용 목적
+            if (mainUsage === 'gaming') {
+                 let p_kt = ranked.find(p => p.provider === 'KT');
+                 if(p_kt) {
+                    p_kt.score += 150;
+                    p_kt.reasons.push('온라인 게임 시 가장 중요한 네트워크 안정성과 낮은 지연시간(ping) 면에서 가장 우수합니다.');
+                 }
+            }
+
+            return ranked.sort((a, b) => b.score - a.score).slice(0, 3);
+        }
+
+        function showResults() {
+            document.getElementById('steps-container').classList.add('hidden');
+            const indicator = document.getElementById(`step-indicator-${appState.currentStep}`);
+            if (indicator) {
+                indicator.classList.remove('active');
+                indicator.classList.add('completed');
+            }
+
+            const resultsSection = document.getElementById('results-section');
+            resultsSection.classList.remove('hidden');
+
+            const recommendations = getRecommendations();
+            const container = document.getElementById('recommendations-container');
+            container.innerHTML = '';
+            
+            recommendations.forEach((rec, index) => {
+                const rankColor = index === 0 ? 'bg-yellow-400' : index === 1 ? 'bg-slate-400' : 'bg-amber-600';
+                const reasonText = rec.reason ? rec.reason : rec.reasons.join(' ');
+
+                const recHtml = `
+                    <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full border-t-4 ${rec.provider === 'KT' ? 'border-orange-500' : rec.provider === 'SK' ? 'border-red-500' : rec.provider === 'LGU' ? 'border-pink-500' : 'border-gray-500'}">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">${rec.name}</h3>
+                            <span class="text-sm font-bold text-white ${rankColor} px-3 py-1 rounded-full">${index + 1}순위</span>
+                        </div>
+                        <div class="flex-grow mt-2">
+                           <p class="text-green-700 font-bold mb-2">⭐ 추천 핵심 사유</p>
+                           <p class="text-gray-700 mb-4 text-sm">${reasonText}</p>
+                           <p class="text-blue-700 font-bold mb-2">💡 주요 특징</p>
+                           <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                            ${rec.features.map(f => `<li>${f}</li>`).join('')}
+                           </ul>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += recHtml;
+            });
+        }
+
+        function restart() {
+            appState.currentStep = 1;
+            appState.totalSteps = 0;
+            appState.userChoices = { reason: null, household: null, currentIsp: null, carrier: null, mainUsage: null };
+            
+            document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('results-section').classList.add('hidden');
+            
+            const allSteps = ['step-1', 'step-2', 'step-3', 'step-4', 'step-5'];
+            allSteps.forEach((s, i) => {
+                const el = document.getElementById(s);
+                if (el) {
+                    if (i === 0) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            });
+            
+            document.getElementById('steps-container').classList.remove('hidden');
+            document.getElementById('step-indicators').innerHTML = '';
+        }
+
+        restart();
+    </script>
+</body>
+</html>
